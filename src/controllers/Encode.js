@@ -2,6 +2,7 @@
 const blowfish = require('xs-blowfish');
 const {md5, sha384, whirlpool} = require('hash-wasm')
 const vigenere = require('vigenere')
+const { base64encode } = require('nodejs-base64');
 
 
 
@@ -49,9 +50,6 @@ module.exports = {
         }
     
         return res.json({"original-text": message.text, "encode-text":encoding})
-    
-        //var decoding = bf.decrypt(encoding);
-        // console.log(JSON.stringify(decoding));
         
     },
     encodeVigenere(req, res){
@@ -63,4 +61,13 @@ module.exports = {
     
         return res.json({"original-text": message.text, "encode-text":secretMessage})
     }, 
+    encodeBase64(req, res){
+        const message = {...req.body}
+        const encoded = base64encode(message.text)
+        if(message.text === ""){
+            return res.json({"original-text": message.text, "encode-text": "Erro"})
+        }
+    
+        return res.json({"original-text": message.text, "encode-text":encoded})
+    }
 }

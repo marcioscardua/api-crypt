@@ -7,6 +7,6 @@ app.use(express.urlencoded({extended : false}))
 app.use(routes)
 
 app.use('/', (req, res) => {
-    res.json({deconde: true})
+    res.send('<h1>API Crypt... Running</h1>')
 } )
 app.listen(4000, () => console.log('Crypts Run'))
